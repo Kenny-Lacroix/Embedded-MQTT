@@ -49,7 +49,7 @@ namespace embedded_GUI
                 {
                     while (reader.Read())
                     {
-                        dataListBox.Items.Add(reader.GetString(0));
+                        dataListBox.Items.Add(reader.GetString(1));
                     }
                 }
                 else
@@ -75,10 +75,10 @@ namespace embedded_GUI
             }
         }
 
-        private void getData(string id)
+        private void getData(string timestamp)
         {
             string connectionString = "datasource=127.0.0.1;port=3306;username=root;password=;database=lora;";
-            string query = "SELECT * FROM data WHERE id = "+id;
+            string query = "SELECT * FROM data WHERE timestamp LIKE '"+timestamp+"'";
 
             // Prepare the connection
             MySqlConnection databaseConnection = new MySqlConnection(connectionString);
