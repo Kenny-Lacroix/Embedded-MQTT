@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 using MySql.Data.MySqlClient;
 
 namespace embedded_GUI
@@ -21,9 +22,19 @@ namespace embedded_GUI
     /// </summary>
     public partial class MainWindow : Window
     {
+        DispatcherTimer timer = new DispatcherTimer();
         public MainWindow()
         {
             InitializeComponent();
+            FillListBox();
+            timer.Tick += new EventHandler(dispatcherTimer_Tick);
+            timer.Interval = new TimeSpan(0, 1,0);
+            timer.Start();
+        }
+
+        private void dispatcherTimer_Tick(object sender, EventArgs e)
+        {
+            dataListBox.Items.Clear();
             FillListBox();
         }
 
