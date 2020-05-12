@@ -1,0 +1,31 @@
+D:\UCLL\academieJaar 2019-2020\2e semester\embedded\project\Embedded-MQTT\embedded GUI\embedded GUI\bin\Debug\embedded GUI.exe.config
+D:\UCLL\academieJaar 2019-2020\2e semester\embedded\project\Embedded-MQTT\embedded GUI\embedded GUI\bin\Debug\embedded GUI.exe
+D:\UCLL\academieJaar 2019-2020\2e semester\embedded\project\Embedded-MQTT\embedded GUI\embedded GUI\bin\Debug\embedded GUI.pdb
+D:\UCLL\academieJaar 2019-2020\2e semester\embedded\project\Embedded-MQTT\embedded GUI\embedded GUI\obj\Debug\embedded GUI.csprojAssemblyReference.cache
+D:\UCLL\academieJaar 2019-2020\2e semester\embedded\project\Embedded-MQTT\embedded GUI\embedded GUI\obj\Debug\MainWindow.g.cs
+D:\UCLL\academieJaar 2019-2020\2e semester\embedded\project\Embedded-MQTT\embedded GUI\embedded GUI\obj\Debug\App.g.cs
+D:\UCLL\academieJaar 2019-2020\2e semester\embedded\project\Embedded-MQTT\embedded GUI\embedded GUI\obj\Debug\embedded GUI_MarkupCompile.cache
+D:\UCLL\academieJaar 2019-2020\2e semester\embedded\project\Embedded-MQTT\embedded GUI\embedded GUI\obj\Debug\embedded GUI_MarkupCompile.lref
+D:\UCLL\academieJaar 2019-2020\2e semester\embedded\project\Embedded-MQTT\embedded GUI\embedded GUI\obj\Debug\MainWindow.baml
+D:\UCLL\academieJaar 2019-2020\2e semester\embedded\project\Embedded-MQTT\embedded GUI\embedded GUI\obj\Debug\embedded GUI.g.resources
+D:\UCLL\academieJaar 2019-2020\2e semester\embedded\project\Embedded-MQTT\embedded GUI\embedded GUI\obj\Debug\embedded_GUI.Properties.Resources.resources
+D:\UCLL\academieJaar 2019-2020\2e semester\embedded\project\Embedded-MQTT\embedded GUI\embedded GUI\obj\Debug\embedded GUI.csproj.GenerateResource.cache
+D:\UCLL\academieJaar 2019-2020\2e semester\embedded\project\Embedded-MQTT\embedded GUI\embedded GUI\obj\Debug\embedded GUI.csproj.CoreCompileInputs.cache
+D:\UCLL\academieJaar 2019-2020\2e semester\embedded\project\Embedded-MQTT\embedded GUI\embedded GUI\obj\Debug\embedded GUI.exe
+D:\UCLL\academieJaar 2019-2020\2e semester\embedded\project\Embedded-MQTT\embedded GUI\embedded GUI\obj\Debug\embedded GUI.pdb
+D:\UCLL\academieJaar 2019-2020\2e semester\embedded\project\Embedded-MQTT\embedded GUI\embedded GUI\bin\Debug\MySql.Data.dll
+D:\UCLL\academieJaar 2019-2020\2e semester\embedded\project\Embedded-MQTT\embedded GUI\embedded GUI\bin\Debug\Google.Protobuf.dll
+D:\UCLL\academieJaar 2019-2020\2e semester\embedded\project\Embedded-MQTT\embedded GUI\embedded GUI\bin\Debug\Zstandard.Net.dll
+D:\UCLL\academieJaar 2019-2020\2e semester\embedded\project\Embedded-MQTT\embedded GUI\embedded GUI\bin\Debug\K4os.Compression.LZ4.Streams.dll
+D:\UCLL\academieJaar 2019-2020\2e semester\embedded\project\Embedded-MQTT\embedded GUI\embedded GUI\bin\Debug\BouncyCastle.Crypto.dll
+D:\UCLL\academieJaar 2019-2020\2e semester\embedded\project\Embedded-MQTT\embedded GUI\embedded GUI\bin\Debug\Ubiety.Dns.Core.dll
+D:\UCLL\academieJaar 2019-2020\2e semester\embedded\project\Embedded-MQTT\embedded GUI\embedded GUI\bin\Debug\Renci.SshNet.dll
+D:\UCLL\academieJaar 2019-2020\2e semester\embedded\project\Embedded-MQTT\embedded GUI\embedded GUI\bin\Debug\System.Buffers.dll
+D:\UCLL\academieJaar 2019-2020\2e semester\embedded\project\Embedded-MQTT\embedded GUI\embedded GUI\bin\Debug\K4os.Compression.LZ4.dll
+D:\UCLL\academieJaar 2019-2020\2e semester\embedded\project\Embedded-MQTT\embedded GUI\embedded GUI\bin\Debug\K4os.Hash.xxHash.dll
+D:\UCLL\academieJaar 2019-2020\2e semester\embedded\project\Embedded-MQTT\embedded GUI\embedded GUI\bin\Debug\System.Memory.dll
+D:\UCLL\academieJaar 2019-2020\2e semester\embedded\project\Embedded-MQTT\embedded GUI\embedded GUI\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
+D:\UCLL\academieJaar 2019-2020\2e semester\embedded\project\Embedded-MQTT\embedded GUI\embedded GUI\bin\Debug\System.Numerics.Vectors.dll
+D:\UCLL\academieJaar 2019-2020\2e semester\embedded\project\Embedded-MQTT\embedded GUI\embedded GUI\bin\Debug\MySql.Data.xml
+D:\UCLL\academieJaar 2019-2020\2e semester\embedded\project\Embedded-MQTT\embedded GUI\embedded GUI\obj\Debug\embedded GUI.exe.config
+D:\UCLL\academieJaar 2019-2020\2e semester\embedded\project\Embedded-MQTT\embedded GUI\embedded GUI\obj\Debug\embedded GUI.csproj.CopyComplete
