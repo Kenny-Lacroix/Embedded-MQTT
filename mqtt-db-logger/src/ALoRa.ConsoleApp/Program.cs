@@ -20,7 +20,6 @@ namespace ALoRa.ConsoleApp
             Console.WriteLine("\nALoRa ConsoleApp - A The Things Network C# Library\n");
 
             var app = new TTNApplication(appID, accessKey, region);
-            string appId = app.AppID;
             app.MessageReceived += App_MessageReceived;
             System.Threading.Thread.Sleep(1000);
         }
@@ -48,10 +47,10 @@ namespace ALoRa.ConsoleApp
 
         private static string[] GetData(string payload)
         { 
-            String[] spearator = { ":",",","{","}","A", "B","\"" };
+            String[] separator = { ":",",","{","}","A", "B","\"" };
             int count = 20;
 
-            String[] strlist = payload.Split(spearator, count,StringSplitOptions.RemoveEmptyEntries);
+            String[] strlist = payload.Split(separator, count,StringSplitOptions.RemoveEmptyEntries);
 
             return new string[2] { strlist[0], strlist[1] };
         }
