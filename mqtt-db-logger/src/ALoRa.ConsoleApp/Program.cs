@@ -6,49 +6,68 @@ using System.Text;
 using System.Threading.Tasks;
 using MySql.Data.MySqlClient;
 using System.Runtime.InteropServices;
+using System.Dynamic;
 
 namespace ALoRa.ConsoleApp
 {
     class Program
     {
+        private static string appID = "20180102";
+        private static string accessKey = "ttn-account-v2.PAUZXYPrQB7VVhB3x_55OsfZrdAQX5S42nxExNSYk_E";
+        private static string region = "eu";
         static void Main(string[] args)
         {
-
             Console.WriteLine("\nALoRa ConsoleApp - A The Things Network C# Library\n");
 
-            var app = new TTNApplication("20180102", "ttn-account-v2.PAUZXYPrQB7VVhB3x_55OsfZrdAQX5S42nxExNSYk_E", "eu");
+            var app = new TTNApplication(appID, accessKey, region);
+            string appId = app.AppID;
             app.MessageReceived += App_MessageReceived;
-
-
             System.Threading.Thread.Sleep(1000);
         }
 
         private static void App_MessageReceived(TTNMessage obj)
         {
-            AddToDb(obj);
-            var data = obj.Payload != null ? BitConverter.ToString(obj.Payload) : string.Empty;
-            Console.WriteLine($"Message Timestamp: {obj.Timestamp}, Device: {obj.DeviceID}, Topic: {obj.Topic}, Payload: {data}");
+            PrepareForDb(obj);
+            Console.WriteLine("Data has been added to the DB");
         }
 
-        private static void AddToDb(TTNMessage obj)
+        private static void PrepareForDb(TTNMessage obj)
         {
-            var data = obj.Payload != null ? BitConverter.ToString(obj.Payload) : string.Empty;
-            string connectionString = "datasource=127.0.0.1;port=3306;username=root;password=;database=lora;";
-            string query = "INSERT INTO data(`id`, `timestamp`, `device_id`, `topic`, `payload`) VALUES (NULL, '" + obj.Timestamp + "', '" + obj.DeviceID + "', '" + obj.Topic + "', '" + data + "')";
-            MySqlConnection databaseConnection = new MySqlConnection(connectionString);
-            MySqlCommand commandDatabase = new MySqlCommand(query, databaseConnection);
-            commandDatabase.CommandTimeout = 60;
-            try
+            //Table Apps
+            string appId =  appID;
+            //Table Devices
+            string deviceID = obj.DeviceID;
+            DateTime lastSeen = DateTime.Now;
+            //Table Data
+            DateTime? timestamp = obj.Timestamp;
+            var ascii = obj.Payload != null ? BitConverter.ToString(obj.Payload) : string.Empty;
+            string payload = AsciiToString(ascii);
+            string[] data = GetData(payload);
+            Console.WriteLine("AppId: "+appId+ " deviceID: "+deviceID+" last seen: "+lastSeen+" timestamp: "+timestamp+" payload: "+payload+" A: "+data[0]+" B: "+data[1]);
+        }
+
+        private static string[] GetData(string payload)
+        { 
+            String[] spearator = { ":",",","{","}","A", "B","\"" };
+            int count = 20;
+
+            String[] strlist = payload.Split(spearator, count,StringSplitOptions.RemoveEmptyEntries);
+
+            return new string[2] { strlist[0], strlist[1] };
+        }
+
+        private static string AsciiToString(string ascii)
+        {
+            ascii = ascii.Replace("-", "");
+            byte[] raw = new byte[ascii.Length / 2];
+            string payload = "";
+            for (int i = 0; i < raw.Length; i++)
             {
-                databaseConnection.Open();
-                MySqlDataReader myReader = commandDatabase.ExecuteReader();
-                Console.WriteLine("data succesfully added to DB");
-                databaseConnection.Close();
+                raw[i] = Convert.ToByte(ascii.Substring(i * 2, 2), 16);
+                payload += Convert.ToChar(raw[i]).ToString();
             }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
+
+            return payload;
         }
     }
 }

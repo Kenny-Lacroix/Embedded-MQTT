@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Remoting.Channels;
 using System.Text;
 using System.Threading.Tasks;
 using uPLibrary.Networking.M2Mqtt.Messages;
@@ -13,11 +14,8 @@ namespace ALoRa.Library
         public static TTNMessage DeserialiseMessage(MqttMsgPublishEventArgs evt)
         {
             var text = Encoding.ASCII.GetString(evt.Message);
-
             var lora = JsonConvert.DeserializeObject<LoRaMessage>(text);
-
             var msg = new TTNMessage(lora, evt.Topic);
-
             return msg;
         }
 
