@@ -70,9 +70,10 @@ namespace ALoRa.Library
                     m_msgReceived(msg);
                 }
             }
-            catch
+            catch (Exception ex)
             {
                 // Swallow any exceptions during message receive
+                Console.WriteLine(ex);
             }
         }
 
