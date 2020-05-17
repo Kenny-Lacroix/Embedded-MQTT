@@ -13,6 +13,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Threading;
+using embedded_GUI.Models;
+using embedded_GUI.Repos;
 using MySql.Data.MySqlClient;
 
 namespace embedded_GUI
@@ -22,53 +24,42 @@ namespace embedded_GUI
     /// </summary>
     public partial class MainWindow : Window
     {
+
+        private static TTNdbContext context = new TTNdbContext();
+        private static IApplicatieRepo applicatieRepo = new ApplicatieRepo(context);
+        private static IDeviceRepo deviceRepo = new DeviceRepo(context);
+        private static IDataRepo dataRepo = new DataRepo(context);
+
+        private static Applicatie applicatie;
+        private static Device device;
+        private static Data newData;
+
         DispatcherTimer timer = new DispatcherTimer();
         public MainWindow()
         {
             InitializeComponent();
             FillListBox();
             timer.Tick += new EventHandler(dispatcherTimer_Tick);
-            timer.Interval = new TimeSpan(0, 1,0);
+            timer.Interval = new TimeSpan(0, 1, 0);
             timer.Start();
         }
 
         private void dispatcherTimer_Tick(object sender, EventArgs e)
         {
-            dataListBox.Items.Clear();
             FillListBox();
         }
 
         private void FillListBox()
         {
-            string connectionString = "datasource=127.0.0.1;port=3306;username=root;password=;database=lora;";
-            string query = "SELECT * FROM data";
-
-            // Prepare the connection
-            MySqlConnection databaseConnection = new MySqlConnection(connectionString);
-            MySqlCommand commandDatabase = new MySqlCommand(query, databaseConnection);
-            commandDatabase.CommandTimeout = 60;
-            MySqlDataReader reader;
-
             try
             {
-                // Open the database
-                databaseConnection.Open();
+                dataListBox.Items.Clear();
+                IList<Data> datas = dataRepo.GetAll();
+                foreach (Data data in datas)
+                {
+                    dataListBox.Items.Add(data.TimeStamp);
+                }
 
-                // Execute the query
-                reader = commandDatabase.ExecuteReader();
-                if (reader.HasRows)
-                {
-                    while (reader.Read())
-                    {
-                        dataListBox.Items.Add(reader.GetString(1));
-                    }
-                }
-                else
-                {
-                    MessageBox.Show("No rows found.");
-                }
-                // Finally close the connection
-                databaseConnection.Close();
             }
             catch (Exception ex)
             {
