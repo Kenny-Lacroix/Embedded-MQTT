@@ -20,7 +20,22 @@ namespace ALoRa.ConsoleApp.Repos
         {
             context.Devices.Add(device);
             context.SaveChanges();
-            Console.WriteLine("Device added");
+        }
+
+        public void Delete(Device device)
+        {
+            context.Devices.Remove(device);
+            context.SaveChanges();
+        }
+
+        public IList<Device> GetAll()
+        {
+            return context.Devices.ToList();
+        }
+
+        public Device GetOne(string name)
+        {
+            return context.Devices.Where(a => a.DeviceName == name).SingleOrDefault();
         }
 
         public void Update(Device device)

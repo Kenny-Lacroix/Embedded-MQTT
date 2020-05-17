@@ -11,5 +11,8 @@ namespace ALoRa.ConsoleApp.Repos
     {
         void Add(Device device);
         void Update(Device device);
+        Device GetOne(string name);
+        IList<Device> GetAll();
+        void Delete(Device device);
     }
 }

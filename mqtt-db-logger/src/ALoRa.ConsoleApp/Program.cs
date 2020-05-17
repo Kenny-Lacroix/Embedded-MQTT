@@ -44,37 +44,53 @@ namespace ALoRa.ConsoleApp
         private static void PrepareForDb(TTNMessage obj)
         {
             //Table Apps
-            string appId =  appID;
+            string appId = appID;
             //Table Devices
             string deviceID = obj.DeviceID;
-            DateTime lastSeen = DateTime.Now;
+            DateTime lastSeen = DateTime.UtcNow;
             //Table Data
             DateTime? timestamp = obj.Timestamp;
             var ascii = obj.Payload != null ? BitConverter.ToString(obj.Payload) : string.Empty;
             string payload = AsciiToString(ascii);
             string[] data = GetData(payload);
-            Console.WriteLine("AppId: "+appId+ " deviceID: "+deviceID+" last seen: "+lastSeen+" timestamp: "+timestamp+" payload: "+payload+" A: "+data[0]+" B: "+data[1]);
+            Console.WriteLine("AppId: " + appId + " deviceID: " + deviceID + " last seen: " + lastSeen + " timestamp: " + timestamp + " payload: " + payload + " A: " + data[0] + " B: " + data[1]);
 
             //add data to database
-            applicatie = new Applicatie() { AppName = appId };
-            Console.WriteLine(applicatie);
-            applicatieRepo.Add(applicatie);
+            AddToDb(appId, deviceID, lastSeen, timestamp, payload, data[0], data[1]);
 
-            device = new Device() { DeviceName = deviceID, LastSeen = lastSeen, AppId = applicatie.AppId };
-            Console.WriteLine(device);
-            deviceRepo.Add(device);
+        }
 
-            newData = new Data() { Payload = payload, A = data[0], B = data[1], TimeStamp = timestamp, DeviceId = device.DeviceId };
-            Console.WriteLine(newData);
+        private static void AddToDb(string appId, string deviceId, DateTime lastSeen, DateTime? timestamp, string payload, string a, string b)
+        {
+            if (applicatieRepo.GetOne(appId) == null)
+            {
+                applicatie = new Applicatie() { AppName = appId };
+                applicatieRepo.Add(applicatie);
+            }
+
+            device = deviceRepo.GetOne(deviceId);
+            if (device == null)
+            {
+                device = new Device() { DeviceName = deviceId, LastSeen = lastSeen, AppId = applicatie.AppId };
+                deviceRepo.Add(device);
+            }
+            else
+            {
+                device.LastSeen = lastSeen;
+                deviceRepo.Update(device);
+            }
+            
+
+            newData = new Data() { Payload = payload, A = a, B = b, TimeStamp = timestamp, DeviceId = device.DeviceId };
             dataRepo.Add(newData);
         }
 
         private static string[] GetData(string payload)
-        { 
-            String[] separator = { ":",",","{","}","A", "B","\"" };
+        {
+            String[] separator = { ":", ",", "{", "}", "A", "B", "\"" };
             int count = 20;
 
-            String[] strlist = payload.Split(separator, count,StringSplitOptions.RemoveEmptyEntries);
+            String[] strlist = payload.Split(separator, count, StringSplitOptions.RemoveEmptyEntries);
 
             return new string[2] { strlist[0], strlist[1] };
         }

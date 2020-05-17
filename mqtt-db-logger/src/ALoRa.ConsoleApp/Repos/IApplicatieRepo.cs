@@ -11,5 +11,8 @@ namespace ALoRa.ConsoleApp.Repos
     {
         void Add(Applicatie applicatie);
         void Update(Applicatie applicatie);
+        Applicatie GetOne(string name);
+        IList<Applicatie> GetAll();
+        void Delete(Applicatie applicatie);
     }
 }
