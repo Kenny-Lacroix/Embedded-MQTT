@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.ServiceModel.Channels;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -99,10 +100,10 @@ namespace embedded_GUI
                 {
                     while (reader.Read())
                     {
-                        idTxt.Text = reader.GetString(2);
+                        DevIdTxt.Text = reader.GetString(2);
                         topicTxt.Text = reader.GetString(3);
                         timeTxt.Text = reader.GetString(1);
-                        payloadTxt.Text = HexToString(reader.GetString(4));
+                        payloadTxt.Text = reader.GetString(4);
                     }
                 }
                 else
@@ -117,20 +118,6 @@ namespace embedded_GUI
                 // Show any error message.
                 MessageBox.Show(ex.Message);
             }
-        }
-
-        private string HexToString(string hex)
-        {
-            hex = hex.Replace("-", "");
-            byte[] raw = new byte[hex.Length / 2];
-            string payload="";
-            for (int i = 0; i < raw.Length; i++)
-            {
-                raw[i] = Convert.ToByte(hex.Substring(i * 2, 2), 16);
-                payload += Convert.ToChar(raw[i]).ToString();
-            }
-
-            return payload;
         }
     }
 
