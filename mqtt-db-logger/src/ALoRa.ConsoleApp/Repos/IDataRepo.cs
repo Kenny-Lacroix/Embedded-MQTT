@@ -11,5 +11,8 @@ namespace ALoRa.ConsoleApp.Repos
     {
         void Add(Data data);
         void Update(Data data);
+        Data GetOne(DateTime time);
+        IList<Data> GetAll();
+        void Delete(Data data);
     }
 }
