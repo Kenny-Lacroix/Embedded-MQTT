@@ -10,7 +10,7 @@ namespace ALoRa.ConsoleApp.Models
     public class TTNdbContext : DbContext
     {
 
-        protected TTNdbContext() : base("datasource=127.0.0.1;port=3306;username=root;password=;database=lora;")
+        public TTNdbContext() : base("datasource=127.0.0.1;port=3306;username=root;password=;database=lora;")
         {
             Database.SetInitializer(new CreateDatabaseIfNotExists<TTNdbContext>());
         }

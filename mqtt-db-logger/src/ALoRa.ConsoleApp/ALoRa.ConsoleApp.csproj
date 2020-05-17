@@ -103,6 +103,12 @@
     <Compile Include="Models\TTNdbContext.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repos\ApplicatieRepo.cs" />
+    <Compile Include="Repos\DataRepo.cs" />
+    <Compile Include="Repos\DeviceRepo.cs" />
+    <Compile Include="Repos\IApplicatieRepo.cs" />
+    <Compile Include="Repos\IDataRepo.cs" />
+    <Compile Include="Repos\IDeviceRepo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

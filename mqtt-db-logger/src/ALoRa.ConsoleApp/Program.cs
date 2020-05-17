@@ -7,11 +7,22 @@ using System.Threading.Tasks;
 using MySql.Data.MySqlClient;
 using System.Runtime.InteropServices;
 using System.Dynamic;
+using ALoRa.ConsoleApp.Models;
+using ALoRa.ConsoleApp.Repos;
 
 namespace ALoRa.ConsoleApp
 {
     class Program
     {
+        private static TTNdbContext context = new TTNdbContext();
+        private static IApplicatieRepo applicatieRepo = new ApplicatieRepo(context);
+        private static IDeviceRepo deviceRepo = new DeviceRepo(context);
+        private static IDataRepo dataRepo = new DataRepo(context);
+
+        private static Applicatie applicatie;
+        private static Device device;
+        private static Data newData;
+
         private static string appID = "20180102";
         private static string accessKey = "ttn-account-v2.PAUZXYPrQB7VVhB3x_55OsfZrdAQX5S42nxExNSYk_E";
         private static string region = "eu";
@@ -22,6 +33,7 @@ namespace ALoRa.ConsoleApp
             var app = new TTNApplication(appID, accessKey, region);
             app.MessageReceived += App_MessageReceived;
             System.Threading.Thread.Sleep(1000);
+
         }
 
         private static void App_MessageReceived(TTNMessage obj)
@@ -43,6 +55,19 @@ namespace ALoRa.ConsoleApp
             string payload = AsciiToString(ascii);
             string[] data = GetData(payload);
             Console.WriteLine("AppId: "+appId+ " deviceID: "+deviceID+" last seen: "+lastSeen+" timestamp: "+timestamp+" payload: "+payload+" A: "+data[0]+" B: "+data[1]);
+
+            //add data to database
+            applicatie = new Applicatie() { AppName = appId };
+            Console.WriteLine(applicatie);
+            applicatieRepo.Add(applicatie);
+
+            device = new Device() { DeviceName = deviceID, LastSeen = lastSeen, AppId = applicatie.AppId };
+            Console.WriteLine(device);
+            deviceRepo.Add(device);
+
+            newData = new Data() { Payload = payload, A = data[0], B = data[1], TimeStamp = timestamp, DeviceId = device.DeviceId };
+            Console.WriteLine(newData);
+            dataRepo.Add(newData);
         }
 
         private static string[] GetData(string payload)
