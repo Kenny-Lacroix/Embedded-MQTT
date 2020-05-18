@@ -33,9 +33,9 @@ namespace embedded_GUI.Repos
             return context.Devices.ToList();
         }
 
-        public Device GetOne(string name)
+        public Device GetOne(int id)
         {
-            return context.Devices.Where(a => a.DeviceName == name).SingleOrDefault();
+            return context.Devices.Where(a => a.DeviceId == id).SingleOrDefault();
         }
 
         public void Update(Device device)

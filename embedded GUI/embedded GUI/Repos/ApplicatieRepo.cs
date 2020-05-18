@@ -33,9 +33,9 @@ namespace embedded_GUI.Repos
             return context.Applicaties.ToList();
         }
 
-        public Applicatie GetOne(string name)
+        public Applicatie GetOne(int id)
         {
-            return context.Applicaties.Where(a => a.AppName == name).SingleOrDefault();
+            return context.Applicaties.Where(a => a.AppId == id).SingleOrDefault();
         }
 
         public void Update(Applicatie applicatie)

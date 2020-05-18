@@ -33,7 +33,12 @@ namespace embedded_GUI.Repos
             return context.Datas.ToList();
         }
 
-        public Data GetOne(DateTime time)
+        public Data GetOneById(int id)
+        {
+            return context.Datas.Where(a => a.DataId == id).SingleOrDefault();
+        }
+
+        public Data GetOneByTime(DateTime? time)
         {
             return context.Datas.Where(a => a.TimeStamp == time).SingleOrDefault();
         }

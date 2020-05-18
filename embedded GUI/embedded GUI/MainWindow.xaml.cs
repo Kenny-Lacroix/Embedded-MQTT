@@ -58,7 +58,8 @@ namespace embedded_GUI
                 IList<Data> datas = dataRepo.GetAll();
                 foreach (Data data in datas)
                 {
-                    dataListBox.Items.Add(data.TimeStamp);
+                    //dataListBox.Items.Add(data.TimeStamp);
+                    dataListBox.Items.Add(data.DataId);
                 }
 
             }
@@ -71,47 +72,40 @@ namespace embedded_GUI
 
         private void dataListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (dataListBox.SelectedItem!=null)
+            try
             {
-                string selectedItem = dataListBox.Items[dataListBox.SelectedIndex].ToString();
-                getData(selectedItem);
+                if (dataListBox.SelectedItem != null)
+                {
+                    Data data = dataRepo.GetOneById(Convert.ToInt32(dataListBox.SelectedItem));
+                    //MessageBox.Show(Convert.ToString(dataListBox.SelectedItem));
+                    //Data data = dataRepo.GetOneByTime(Convert.ToDateTime(dataListBox.SelectedItem));
+                    getData(data);
+                }
+            }
+            catch (Exception ex)
+            {
+                // Show any error message.
+                MessageBox.Show(ex.Message);
             }
         }
 
-        private void getData(string timestamp)
+        private void getData(Data data)
         {
-            string connectionString = "datasource=127.0.0.1;port=3306;username=root;password=;database=lora;";
-            string query = "SELECT * FROM data WHERE timestamp LIKE '"+timestamp+"'";
-
-            // Prepare the connection
-            MySqlConnection databaseConnection = new MySqlConnection(connectionString);
-            MySqlCommand commandDatabase = new MySqlCommand(query, databaseConnection);
-            commandDatabase.CommandTimeout = 60;
-            MySqlDataReader reader;
-
             try
             {
-                // Open the database
-                databaseConnection.Open();
+                ATxt.Text = data.A;
+                BTxt.Text = data.B;
+                payloadTxt.Text = data.Payload;
+                timeTxt.Text = data.TimeStamp.ToString();
 
-                // Execute the query
-                reader = commandDatabase.ExecuteReader();
-                if (reader.HasRows)
-                {
-                    while (reader.Read())
-                    {
-                        DevIdTxt.Text = reader.GetString(2);
-                        topicTxt.Text = reader.GetString(3);
-                        timeTxt.Text = reader.GetString(1);
-                        payloadTxt.Text = reader.GetString(4);
-                    }
-                }
-                else
-                {
-                    MessageBox.Show("No rows found.");
-                }
-                // Finally close the connection
-                databaseConnection.Close();
+                //Device device = data.Device;
+                Device device = deviceRepo.GetOne(data.DeviceId);
+                DevIdTxt.Text = device.DeviceName;
+                lastSeenTxt.Text = device.LastSeen.ToString();
+
+                Applicatie applicatie = applicatieRepo.GetOne(device.AppId); ;
+                AppIdTxt.Text = applicatie.AppName;
+
             }
             catch (Exception ex)
             {

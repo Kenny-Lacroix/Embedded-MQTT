@@ -39,7 +39,7 @@
                HorizontalAlignment="Left"
                VerticalAlignment="Top"
                Content="Last seen:" />
-        <TextBox x:Name="topicTxt"
+        <TextBox x:Name="lastSeenTxt"
                  Width="231"
                  Height="23"
                  Margin="162,221,0,0"
@@ -103,7 +103,7 @@
                HorizontalAlignment="Left"
                VerticalAlignment="Top"
                Content="App identifier:" />
-        <TextBox x:Name="AppIdTxt_Copy"
+        <TextBox x:Name="AppIdTxt"
                  Width="231"
                  Height="23"
                  Margin="162,108,0,0"

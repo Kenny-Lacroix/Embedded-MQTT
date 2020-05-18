@@ -11,7 +11,7 @@ namespace embedded_GUI.Repos
     {
         void Add(Device device);
         void Update(Device device);
-        Device GetOne(string name);
+        Device GetOne(int id);
         IList<Device> GetAll();
         void Delete(Device device);
     }

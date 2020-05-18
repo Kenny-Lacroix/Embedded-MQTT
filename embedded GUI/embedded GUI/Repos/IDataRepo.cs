@@ -11,7 +11,9 @@ namespace embedded_GUI.Repos
     {
         void Add(Data data);
         void Update(Data data);
-        Data GetOne(DateTime time);
+        //Data GetOne(DateTime? time);
+        Data GetOneById(int id);
+        Data GetOneByTime(DateTime? time);
         IList<Data> GetAll();
         void Delete(Data data);
     }

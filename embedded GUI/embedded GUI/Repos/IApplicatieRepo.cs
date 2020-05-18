@@ -11,7 +11,7 @@ namespace embedded_GUI.Repos
     {
         void Add(Applicatie applicatie);
         void Update(Applicatie applicatie);
-        Applicatie GetOne(string name);
+        Applicatie GetOne(int id);
         IList<Applicatie> GetAll();
         void Delete(Applicatie applicatie);
     }

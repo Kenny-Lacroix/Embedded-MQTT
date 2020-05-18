@@ -47,11 +47,13 @@ namespace ALoRa.Library
             m_client.Connect(m_clientId, m_appId, accessKey);
 
             m_client.Subscribe( new string[] { "+/devices/+/up" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE });
+            Console.WriteLine("connection made");
         }
 
         protected override void Dispose(bool disposing)
         {
             m_client.Disconnect();
+            Console.WriteLine("connection destroyed");
         }
 
         public void Publish()
