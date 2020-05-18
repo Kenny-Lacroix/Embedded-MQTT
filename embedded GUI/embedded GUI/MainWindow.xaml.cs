@@ -77,7 +77,7 @@ namespace embedded_GUI
                 if (dataListBox.SelectedItem != null)
                 {
                     Data data = dataRepo.GetOneById(Convert.ToInt32(dataListBox.SelectedItem));
-                    //MessageBox.Show(Convert.ToString(dataListBox.SelectedItem));
+                    MessageBox.Show(Convert.ToString(dataListBox.SelectedItem));
                     //Data data = dataRepo.GetOneByTime(Convert.ToDateTime(dataListBox.SelectedItem));
                     getData(data);
                 }
