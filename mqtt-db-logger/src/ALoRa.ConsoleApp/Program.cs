@@ -37,6 +37,7 @@ namespace ALoRa.ConsoleApp
 
         private static void App_MessageReceived(TTNMessage obj)
         {
+            Console.WriteLine("Message received, adding Data to the DB");
             PrepareForDb(obj);
             Console.WriteLine("Data has been added to the DB");
         }

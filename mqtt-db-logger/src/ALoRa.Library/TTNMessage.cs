@@ -35,6 +35,8 @@ namespace ALoRa.Library
             {
                 Payload = Convert.FromBase64String(msg.payload_raw);
             }
+
+            Console.WriteLine("message received");
         }
     }
 }
